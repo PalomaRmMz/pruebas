@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   const docDiscapacidad = document.getElementById("doc_discapacidad");
   const docIndigena = document.getElementById("doc_indigena");
+  const radiosOpcionDiscapacidad = document.querySelectorAll(
+    'input[name="opcion_discapacidad"]'
+  );
+  const radiosOpcionIndigenas = document.querySelectorAll(
+    'input[name="opcion_indigenas"]'
+  );
   // -------------------
 
   function validateForm() {
@@ -50,9 +56,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (discapacidadCheckbox.checked) {
             docDiscapacidad.setAttribute("required", "");
+            radiosOpcionDiscapacidad.forEach((radio) => {
+              radio.setAttribute("required", "");
+            });
           } else {
             docDiscapacidad.removeAttribute("required");
             docDiscapacidad.value = "";
+            radiosOpcionDiscapacidad.forEach((radio) => {
+              radio.removeAttribute("required");
+            });
           }
           break;
         case "indigenasCheckbox":
@@ -63,9 +75,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (indigenasCheckbox.checked) {
             docIndigena.setAttribute("required", "");
+            radiosOpcionIndigenas.forEach((radio) => {
+              radio.setAttribute("required", "");
+            });
           } else {
             docIndigena.removeAttribute("required");
             docIndigena.value = "";
+            radiosOpcionIndigenas.forEach((radio) => {
+              radio.removeAttribute("required");
+            });
           }
           break;
         case "jovenesCheckbox":
@@ -89,6 +107,12 @@ document.addEventListener("DOMContentLoaded", function () {
             docDiscapacidad.value = "";
             docIndigena.removeAttribute("required");
             docIndigena.value = "";
+            radiosOpcionDiscapacidad.forEach((radio) => {
+              radio.removeAttribute("required");
+            });
+            radiosOpcionIndigenas.forEach((radio) => {
+              radio.setAttribute("required", "");
+            });
           }
           break;
         default:
@@ -107,5 +131,16 @@ document.addEventListener("DOMContentLoaded", function () {
     validateForm();
   });
 
+  radiosOpcionDiscapacidad.forEach((radio) => {
+    radio.addEventListener("change", function () {
+      validateForm();
+    });
+  });
+
+  radiosOpcionIndigenas.forEach((radio) => {
+    radio.addEventListener("change", function () {
+      validateForm();
+    });
+  });
   handleCheckboxChange();
 });
