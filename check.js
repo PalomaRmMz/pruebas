@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "contenedorRadioIndigenas"
   );
   const docDiscapacidad = document.getElementById("doc_discapacidad");
-
+  const docIndigena = document.getElementById("doc_indigena");
   // -------------------
 
   function validateForm() {
@@ -60,6 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
           contenedorRadioIndigenas.style.display = indigenasCheckbox.checked
             ? "block"
             : "none";
+
+          if (indigenasCheckbox.checked) {
+            docIndigena.setAttribute("required", "");
+          } else {
+            docIndigena.removeAttribute("required");
+            docIndigena.value = "";
+          }
           break;
         case "jovenesCheckbox":
           console.log("jovenesCheckbox SELECCIONADO");
@@ -78,7 +85,10 @@ document.addEventListener("DOMContentLoaded", function () {
           if (noAplicaCheckbox.checked) {
             contenedorRadioDiscapacidad.style.display = "none";
             contenedorRadioIndigenas.style.display = "none";
+            docDiscapacidad.removeAttribute("required");
             docDiscapacidad.value = "";
+            docIndigena.removeAttribute("required");
+            docIndigena.value = "";
           }
           break;
         default:
@@ -90,6 +100,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   docDiscapacidad.addEventListener("change", function () {
+    validateForm();
+  });
+
+  docIndigena.addEventListener("change", function () {
     validateForm();
   });
 
