@@ -33,10 +33,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function handleDiscapacidadChange() {
+    const contenedorRadioDiscapacidad = document.getElementById(
+      "contenedorRadioDiscapacidad"
+    );
+    const docDiscapacidadInput = document.getElementById("doc_discapacidad");
+
     contenedorRadioDiscapacidad.style.display = discapacidadCheckbox.checked
       ? "block"
       : "none";
-    handleCheckboxChange();
+
+    // Si contenedorRadioDiscapacidad es visible, se agrega el atributo required al input, de lo contrario se quita
+    if (contenedorRadioDiscapacidad.style.display === "block") {
+      docDiscapacidadInput.setAttribute("required", "");
+    } else {
+      docDiscapacidadInput.removeAttribute("required");
+      docDiscapacidadInput.value = ""; // Esto limpia el valor del input
+    }
   }
 
   checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
