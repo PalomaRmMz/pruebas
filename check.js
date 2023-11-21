@@ -6,71 +6,67 @@ document.addEventListener("DOMContentLoaded", function () {
   const form = document.getElementById("miFormulario");
   const submitButton = document.getElementById("btnEnviar");
 
+  // -------------------
+  const contenedorRadioDiscapacidad = document.getElementById(
+    "contenedorRadioDiscapacidad"
+  );
+  // -------------------
+
   function validateForm() {
     submitButton.disabled = !form.checkValidity();
   }
 
   function handleCheckboxChange() {
-    const checkedCheckboxesGRUPOSPRIORITARIOS = [
-      ...checkboxesGRUPOSPRIORITARIOS,
-    ].some((checkGrupos) => checkGrupos.checked);
+    let checkedAnyCheckbox = false;
+
     checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
-      checkGrupos.required = !checkedCheckboxesGRUPOSPRIORITARIOS;
+      if (checkGrupos.checked) {
+        checkedAnyCheckbox = true;
+      }
     });
+
+    checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
+      checkGrupos.required = !checkedAnyCheckbox;
+    });
+
     validateForm();
   }
 
-  function handleDiscapacidadChange() {
-    const contenedorRadioDiscapacidad = document.getElementById(
-      "contenedorRadioDiscapacidad"
-    );
-    contenedorRadioDiscapacidad.style.display = discapacidadCheckbox.checked
-      ? "block"
-      : "none";
-    handleCheckboxChange();
-  }
-
-  function handleIndigenasChange() {
-    const contenedorRadioIndigenas = document.getElementById(
-      "contenedorRadioIndigenas"
-    );
-    contenedorRadioIndigenas.style.display = indigenasCheckbox.checked
-      ? "block"
-      : "none";
-    handleCheckboxChange();
-  }
-
-  function handleNoAplicaChange() {
-    const contenedorRadioDiscapacidad = document.getElementById(
-      "contenedorRadioDiscapacidad"
-    );
-    const contenedorRadioIndigenas = document.getElementById(
-      "contenedorRadioIndigenas"
-    );
-
-    contenedorRadioDiscapacidad.style.display = "none";
-    contenedorRadioIndigenas.style.display = "none";
-
-    checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
-      if (checkGrupos !== noAplicaCheckbox) {
-        checkGrupos.disabled = noAplicaCheckbox.checked;
-        checkGrupos.checked = noAplicaCheckbox.checked
-          ? false
-          : checkGrupos.checked;
-      }
-    });
-    handleCheckboxChange();
-  }
-
   checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
-    checkGrupos.addEventListener("change", handleCheckboxChange);
+    checkGrupos.addEventListener("change", function () {
+      switch (checkGrupos.id) {
+        case "lgbttqiCheckbox":
+          console.log("lgbttqiCheckbox SELECCIONADO");
+          break;
+        case "discapacidadCheckbox":
+          console.log("discapacidadCheckbox SELECCIONADO");
+          contenedorRadioDiscapacidad.style.display =
+            discapacidadCheckbox.checked ? "block" : "none";
+          break;
+        case "indigenasCheckbox":
+          console.log("indigenasCheckbox SELECCIONADO");
+          break;
+        case "jovenesCheckbox":
+          console.log("jovenesCheckbox SELECCIONADO");
+          break;
+        case "noAplicaCheckbox":
+          console.log("noAplicaCheckbox SELECCIONADO");
+          checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
+            if (checkGrupos !== noAplicaCheckbox) {
+              checkGrupos.disabled = noAplicaCheckbox.checked;
+              checkGrupos.checked = noAplicaCheckbox.checked
+                ? false
+                : checkGrupos.checked;
+            }
+          });
+          break;
+        default:
+          break;
+      }
+      handleCheckboxChange();
+      validateForm();
+    });
   });
 
-  discapacidadCheckbox.addEventListener("change", handleDiscapacidadChange);
-  indigenasCheckbox.addEventListener("change", handleIndigenasChange);
-  noAplicaCheckbox.addEventListener("change", handleNoAplicaChange);
-
-  handleDiscapacidadChange();
-  handleIndigenasChange();
-  handleNoAplicaChange();
+  handleCheckboxChange();
 });
