@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const checkboxes = document.querySelectorAll(
+  const checkboxesGRUPOSPRIORITARIOS = document.querySelectorAll(
     'input[name="grupos_prioritarios[]"]'
   );
   const noAplicaCheckbox = document.getElementById("noAplicaCheckbox");
@@ -7,34 +7,33 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitButton = document.getElementById("btnEnviar");
 
   function validateForm() {
-    const isValid = form.checkValidity();
-    submitButton.disabled = !isValid;
+    submitButton.disabled = !form.checkValidity();
   }
 
   function handleCheckboxChange() {
-    const checkedCheckboxes = Array.from(checkboxes).some(
-      (checkbox) => checkbox.checked
-    );
-    checkboxes.forEach((checkbox) => {
-      checkbox.required = !checkedCheckboxes;
+    const checkedCheckboxesGRUPOSPRIORITARIOS = [
+      ...checkboxesGRUPOSPRIORITARIOS,
+    ].some((checkGrupos) => checkGrupos.checked);
+    checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
+      checkGrupos.required = !checkedCheckboxesGRUPOSPRIORITARIOS;
     });
     validateForm();
   }
 
   function handleNoAplicaChange() {
-    checkboxes.forEach((checkbox) => {
-      if (checkbox !== noAplicaCheckbox) {
-        checkbox.disabled = noAplicaCheckbox.checked;
-        if (noAplicaCheckbox.checked) {
-          checkbox.checked = false;
-        }
+    checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
+      if (checkGrupos !== noAplicaCheckbox) {
+        checkGrupos.disabled = noAplicaCheckbox.checked;
+        checkGrupos.checked = noAplicaCheckbox.checked
+          ? false
+          : checkGrupos.checked;
       }
     });
     handleCheckboxChange();
   }
 
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener("change", handleCheckboxChange);
+  checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
+    checkGrupos.addEventListener("change", handleCheckboxChange);
   });
 
   noAplicaCheckbox.addEventListener("change", handleNoAplicaChange);
