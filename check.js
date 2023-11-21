@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const contenedorRadioDiscapacidad = document.getElementById(
     "contenedorRadioDiscapacidad"
   );
+  const contenedorRadioIndigenas = document.getElementById(
+    "contenedorRadioIndigenas"
+  );
   // -------------------
 
   function validateForm() {
@@ -45,6 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
           break;
         case "indigenasCheckbox":
           console.log("indigenasCheckbox SELECCIONADO");
+          contenedorRadioIndigenas.style.display = discapacidadCheckbox.checked
+            ? "block"
+            : "none";
           break;
         case "jovenesCheckbox":
           console.log("jovenesCheckbox SELECCIONADO");
