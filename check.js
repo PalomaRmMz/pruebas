@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
           break;
         case "indigenasCheckbox":
           console.log("indigenasCheckbox SELECCIONADO");
-          contenedorRadioIndigenas.style.display = discapacidadCheckbox.checked
+          contenedorRadioIndigenas.style.display = indigenasCheckbox.checked
             ? "block"
             : "none";
           break;
@@ -65,6 +65,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 : checkGrupos.checked;
             }
           });
+
+          if (noAplicaCheckbox.checked) {
+            contenedorRadioDiscapacidad.style.display = "none";
+            contenedorRadioIndigenas.style.display = "none";
+          }
           break;
         default:
           break;
