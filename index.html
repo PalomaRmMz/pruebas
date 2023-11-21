@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario con Bootstrap</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- <script src="https://kit.fontawesome.com/ed1b64eef4.js" crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+    <div class="container mt-5">
+        <form class="was-validated" id="myForm">
+            <div class="mb-3">
+                <label for="relatedInputdos" class="form-label">Related Input</label>
+                <input type="text" class="form-control" id="relatedInputdos" placeholder="Related input" required>
+                <div class="invalid-feedback">
+                    Please enter some text in the related dosinput field.
+                </div>
+            </div>
+
+
+            <div class="card mt-5">
+                <div class="card-header">Grupos de atención prioritaria</div>
+                <div class="card-body pe-4 ps-4">
+                    <p class="form-label fs-7">
+                        ¿Te identificas o formas parte de algún grupo de atención prioritaria?
+                    </p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="grupos_prioritarios[]"
+                                    id="lgbttqiCheckbox" value="COMUNIDAD LGBTTIQ+">
+                                <label class="form-check-label" for="lgbttqiCheckbox">
+                                    Comunidad LGBTTTIQ+
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="grupos_prioritarios[]"
+                                    id="discapacidadCheckbox" value="PERSONAS EN SITUACIÓN DE DISCAPACIDAD">
+                                <label class="form-check-label" for="discapacidadCheckbox">
+                                    Personas en situación de discapacidad
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="grupos_prioritarios[]"
+                                    id="indigenasCheckbox" value="PERSONAS DE PUEBLOS Y COMUNIDADES INDÍGENAS">
+                                <label class="form-check-label" for="indigenasCheckbox">
+                                    Personas de pueblos y comunidades indígenas
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="grupos_prioritarios[]"
+                                    id="jovenes" value="PERSONAS JÓVENES">
+                                <label class="form-check-label" for="jovenes">
+                                    Personas jóvenes
+                                </label>
+                                <button id="alert-opcion-jovenes" class="btn btn-primary btn-sm"
+                                    style="border-radius: 500px; padding: 0 10px !important;">
+                                    <i class=" fa-solid fa-question fa-2xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="grupos_prioritarios[]"
+                                    value="NO APLICA" id="noAplicaCheckbox">
+                                <label class="form-check-label" for="noAplicaCheckbox">
+                                    No Aplica
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="contenedorRadioDiscapacidad" style="display: none;" class="mt-4">
+                        <h5>Personas en situación de discapacidad</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label fs-7" for="doc_discapacidad">
+                                    Documento Discapacidad: <i class="fa-solid fa-asterisk fa-2xs"
+                                        style="color: #ff0000;"></i> &nbsp;
+                                    <button id="alert-doc-discapacidad" class="btn btn-primary btn-sm"
+                                        style="border-radius: 500px; padding: 0 10px !important;">
+                                        <i class=" fa-solid fa-question fa-2xs"></i>
+                                    </button>
+                                </label>
+                                <input type="file" maxlength="1048576" accept=".pdf" name="doc_discapacidad"
+                                    id="doc_discapacidad" class="form-control">
+                                <div class="invalid-feedback fs-7">
+                                    Por favor, sube tu Documento discapacidad (tamaño máximo 1MB)
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-1">
+                                <p class="form-label fs-7 mt-2">
+                                    En cualquiera de las estapas de procesos de selección, ¿requieres algun ajuste o
+                                    medida de accesibilidad especifica o para el desahoogo de la actividades?
+                                    <i class="fa-solid fa-asterisk fa-2xs" style="color: #ff0000;"></i> &nbsp;
+                                </p>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="opcion_discapacidad"
+                                        id="opcion_discapacidadSI" value="SI">
+                                    <label class="form-check-label" for="opcion_discapacidadSI">Si</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="opcion_discapacidad"
+                                        id="opcion_discapacidadNO" value="NO">
+                                    <label class="form-check-label" for="opcion_discapacidadNO">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contenedorOpcionDiscapacidad" style="display: none;" class="mt-2">
+                        <label class="form-label fs-7" for="ayuda_discapacidad">
+                            Que ayuda necesita?:
+                            <i class="fa-solid fa-asterisk fa-2xs" style="color: #ff0000;"></i>
+                        </label>
+                        <input type="text" class="form-control text-uppercase" name="ayuda_discapacidad"
+                            id="ayuda_discapacidad">
+                        <div class="invalid-feedback fs-7">
+                            Por favor, ingrese tipo de ayuda
+                        </div>
+                    </div>
+                    <div id="contenedorRadioIndigenas" style="display: none;" class="mt-4">
+                        <h5>Personas de pueblos y comunidades indígenas</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label fs-7" for="doc_indigena">
+                                    Documento Indigena: <i class="fa-solid fa-asterisk fa-2xs"
+                                        style="color: #ff0000;"></i>
+                                    &nbsp;
+                                    <button id="alert-doc-indigena" class="btn btn-primary btn-sm"
+                                        style="border-radius: 500px; padding: 0 10px !important;">
+                                        <i class=" fa-solid fa-question fa-2xs"></i>
+                                    </button>
+                                </label>
+                                <input type="file" maxlength="1048576" accept=".pdf" name="doc_indigena"
+                                    id="doc_indigena" class="form-control">
+                                <div class="invalid-feedback fs-7">
+                                    Por favor, sube tu Documento indigena (tamaño máximo 1MB)
+                                </div>
+                            </div>
+                            <div class="col-md-6 mt-1">
+                                <p class="form-label fs-7 mt-2">
+                                    En cualquiera de las estapas de procesos de selección, ¿requieres algun ajuste o
+                                    medida de accesibilidad especifica o para el desahoogo de la actividades?
+                                    <i class="fa-solid fa-asterisk fa-2xs" style="color: #ff0000;"></i> &nbsp;
+                                </p>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="opcion_indigenas"
+                                        id="opcion_indigenasSI" value="SI">
+                                    <label class="form-check-label" for="opcion_indigenasSI">Si</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input type="radio" class="form-check-input" name="opcion_indigenas"
+                                        id="opcion_indigenasNO" value="NO">
+                                    <label class="form-check-label" for="opcion_indigenasNO">No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contenedorOpcionIndigena" style="display: none;" class="mt-2">
+                        <label class="form-label fs-7" for="ayuda_indigena">
+                            Que ayuda necesita?:
+                            <i class="fa-solid fa-asterisk fa-2xs" style="color: #ff0000;"></i>
+                        </label>
+                        <input type="text" class="form-control text-uppercase" name="ayuda_indigena"
+                            id="ayuda_indigena">
+                        <div class="invalid-feedback fs-7">
+                            Por favor, ingrese tipo de ayuda
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="relatedInput" class="form-label">Related Input</label>
+                <input type="text" class="form-control" id="relatedInput" placeholder="Related input" required>
+                <div class="invalid-feedback">
+                    Please enter some text in the related input field.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit" name="btnEnviar" id="btnEnviar" disabled>Submit
+                    form</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./check.js"></script>
+</body>
+
+</html>
