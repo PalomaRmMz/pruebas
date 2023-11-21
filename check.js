@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     'input[name="grupos_prioritarios[]"]'
   );
   const noAplicaCheckbox = document.getElementById("noAplicaCheckbox");
-  const form = document.getElementById("myForm");
+  const form = document.getElementById("miFormulario");
   const submitButton = document.getElementById("btnEnviar");
 
   function validateForm() {
@@ -32,11 +32,19 @@ document.addEventListener("DOMContentLoaded", function () {
     handleCheckboxChange();
   }
 
+  function handleDiscapacidadChange() {
+    contenedorRadioDiscapacidad.style.display = discapacidadCheckbox.checked
+      ? "block"
+      : "none";
+    handleCheckboxChange();
+  }
+
   checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
     checkGrupos.addEventListener("change", handleCheckboxChange);
   });
 
   noAplicaCheckbox.addEventListener("change", handleNoAplicaChange);
+  discapacidadCheckbox.addEventListener("change", handleDiscapacidadChange);
 
   handleCheckboxChange();
 });
