@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const contenedorRadioIndigenas = document.getElementById(
     "contenedorRadioIndigenas"
   );
+  const docDiscapacidad = document.getElementById("doc_discapacidad");
+
   // -------------------
 
   function validateForm() {
@@ -45,6 +47,13 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("discapacidadCheckbox SELECCIONADO");
           contenedorRadioDiscapacidad.style.display =
             discapacidadCheckbox.checked ? "block" : "none";
+
+          if (discapacidadCheckbox.checked) {
+            docDiscapacidad.setAttribute("required", "");
+          } else {
+            docDiscapacidad.removeAttribute("required");
+            docDiscapacidad.value = "";
+          }
           break;
         case "indigenasCheckbox":
           console.log("indigenasCheckbox SELECCIONADO");
@@ -69,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (noAplicaCheckbox.checked) {
             contenedorRadioDiscapacidad.style.display = "none";
             contenedorRadioIndigenas.style.display = "none";
+            docDiscapacidad.value = "";
           }
           break;
         default:
@@ -77,6 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
       handleCheckboxChange();
       validateForm();
     });
+  });
+
+  docDiscapacidad.addEventListener("change", function () {
+    validateForm();
   });
 
   handleCheckboxChange();
