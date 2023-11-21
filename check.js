@@ -20,7 +20,37 @@ document.addEventListener("DOMContentLoaded", function () {
     validateForm();
   }
 
+  function handleDiscapacidadChange() {
+    const contenedorRadioDiscapacidad = document.getElementById(
+      "contenedorRadioDiscapacidad"
+    );
+    contenedorRadioDiscapacidad.style.display = discapacidadCheckbox.checked
+      ? "block"
+      : "none";
+    handleCheckboxChange();
+  }
+
+  function handleIndigenasChange() {
+    const contenedorRadioIndigenas = document.getElementById(
+      "contenedorRadioIndigenas"
+    );
+    contenedorRadioIndigenas.style.display = indigenasCheckbox.checked
+      ? "block"
+      : "none";
+    handleCheckboxChange();
+  }
+
   function handleNoAplicaChange() {
+    const contenedorRadioDiscapacidad = document.getElementById(
+      "contenedorRadioDiscapacidad"
+    );
+    const contenedorRadioIndigenas = document.getElementById(
+      "contenedorRadioIndigenas"
+    );
+
+    contenedorRadioDiscapacidad.style.display = "none";
+    contenedorRadioIndigenas.style.display = "none";
+
     checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
       if (checkGrupos !== noAplicaCheckbox) {
         checkGrupos.disabled = noAplicaCheckbox.checked;
@@ -32,31 +62,15 @@ document.addEventListener("DOMContentLoaded", function () {
     handleCheckboxChange();
   }
 
-  function handleDiscapacidadChange() {
-    const contenedorRadioDiscapacidad = document.getElementById(
-      "contenedorRadioDiscapacidad"
-    );
-    const docDiscapacidadInput = document.getElementById("doc_discapacidad");
-
-    contenedorRadioDiscapacidad.style.display = discapacidadCheckbox.checked
-      ? "block"
-      : "none";
-
-    // Si contenedorRadioDiscapacidad es visible, se agrega el atributo required al input, de lo contrario se quita
-    if (contenedorRadioDiscapacidad.style.display === "block") {
-      docDiscapacidadInput.setAttribute("required", "");
-    } else {
-      docDiscapacidadInput.removeAttribute("required");
-      docDiscapacidadInput.value = ""; // Esto limpia el valor del input
-    }
-  }
-
   checkboxesGRUPOSPRIORITARIOS.forEach((checkGrupos) => {
     checkGrupos.addEventListener("change", handleCheckboxChange);
   });
 
-  noAplicaCheckbox.addEventListener("change", handleNoAplicaChange);
   discapacidadCheckbox.addEventListener("change", handleDiscapacidadChange);
+  indigenasCheckbox.addEventListener("change", handleIndigenasChange);
+  noAplicaCheckbox.addEventListener("change", handleNoAplicaChange);
 
-  handleCheckboxChange();
+  handleDiscapacidadChange();
+  handleIndigenasChange();
+  handleNoAplicaChange();
 });
