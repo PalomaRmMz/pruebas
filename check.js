@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const checkboxes = document.querySelectorAll(
     'input[name="grupos_prioritarios[]"]'
   );
+  const noAplicaCheckbox = document.getElementById("noAplicaCheckbox");
   const form = document.getElementById("myForm");
   const submitButton = document.getElementById("btnEnviar");
 
@@ -20,10 +21,23 @@ document.addEventListener("DOMContentLoaded", function () {
     validateForm();
   }
 
+  function handleNoAplicaChange() {
+    checkboxes.forEach((checkbox) => {
+      if (checkbox !== noAplicaCheckbox) {
+        checkbox.disabled = noAplicaCheckbox.checked;
+        if (noAplicaCheckbox.checked) {
+          checkbox.checked = false;
+        }
+      }
+    });
+    handleCheckboxChange();
+  }
+
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", handleCheckboxChange);
   });
 
-  // Verificar si al menos uno está seleccionado al cargar la página
+  noAplicaCheckbox.addEventListener("change", handleNoAplicaChange);
+
   handleCheckboxChange();
 });
