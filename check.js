@@ -21,6 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const radiosOpcionIndigenas = document.querySelectorAll(
     'input[name="opcion_indigenas"]'
   );
+  const radioDiscapacidadSI = document.querySelector("opcion_discapacidad");
+  const contenedorOpcionDiscapacidadSI = document.getElementById(
+    "contenedorOpcionDiscapacidad"
+  );
   // -------------------
 
   function validateForm() {
@@ -59,6 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
             radiosOpcionDiscapacidad.forEach((radio) => {
               radio.setAttribute("required", "");
             });
+            // radioDiscapacidadSI.checked ? "block" : "none";
+            if (radioDiscapacidadSI.checked) {
+              contenedorOpcionDiscapacidadSI.style.display = "block";
+            } else {
+              contenedorOpcionDiscapacidadSI.style.display = "none";
+            }
           } else {
             docDiscapacidad.removeAttribute("required");
             docDiscapacidad.value = "";
